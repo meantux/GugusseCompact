@@ -49,8 +49,8 @@ module newMainMat(){
 }
 
 
-module printLabel(){
-    translate([-5,-14.2, fullHeight-wallThickness/2])linear_extrude(height=wallThickness)text(label, size=2.5);
+module printLabel(txt){
+    translate([-5,-14.2, fullHeight-wallThickness/2])linear_extrude(height=wallThickness)text(txt, size=2.5);    
 }
 
 difference(){
@@ -58,6 +58,8 @@ difference(){
     translate([0,0,-1])cylinder(d=bearingDiam+2*tolerance, h=bearingHeight+tolerance+1);
     translate([0,0,fullHeight-bearingHeight-1])cylinder(d=bearingDiam+2*tolerance, h=bearingHeight+tolerance+1);
     cylinder(d=shaftHoleDiam, h=fullHeight);
-    printLabel();
-    rotate([0,0,180])printLabel();
+    printLabel(label);
+    rotate([0,0,90])printLabel("drive");
+    rotate([0,0,180])printLabel(label);
+    rotate([0,0,-90])printLabel("drive");
 }

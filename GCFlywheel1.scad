@@ -4,7 +4,7 @@ $fn=360;
 
 // Choose a value between 8.0, 9.5, 16.0, 28.0 or 35.0
 // depending on the width of the film.
-filmWidth=35.0;
+filmWidth=8.0;
 
 // Choose a tolerance for inserting a bearing
 // that depends on your 3D printer resolution
@@ -49,8 +49,8 @@ module newMainMat(){
 }
 
 
-module printLabel(){
-    translate([-5,-14.2, fullHeight-wallThickness/2])linear_extrude(height=wallThickness)text(label, size=2.5);
+module printLabel(txt, size){
+    translate([-5,-14.2, fullHeight-wallThickness/2])linear_extrude(height=wallThickness)text(txt, size=size);
 }
 
 difference(){
@@ -58,6 +58,8 @@ difference(){
     translate([0,0,-1])cylinder(d=bearingDiam+2*tolerance, h=bearingHeight+tolerance+1);
     translate([0,0,fullHeight-bearingHeight-1])cylinder(d=bearingDiam+2*tolerance, h=bearingHeight+tolerance+1);
     cylinder(d=shaftHoleDiam, h=fullHeight);
-    printLabel();
-    rotate([0,0,180])printLabel();
+    printLabel(label, 2.5);
+    rotate([0,0,90])printLabel("flywheel",2.0);
+    rotate([0,0,180])printLabel(label,2.5);
+    rotate([0,0,-90])printLabel("flywheel",2.0);
 }
